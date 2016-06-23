@@ -1,0 +1,29 @@
+.countries{
+    text-align: center;
+    background: #f4f2f1;
+    color: #b6b4b3;
+    .select-country{
+      li{
+        display: inline-block;
+      }
+    }
+  }
+@media (max-width:@screen-phone) {
+.countries{
+  padding-top: 50px;
+  padding-bottom: 50px;
+     .select-country{
+        li{
+          a{
+              width: 75px;
+              height: 50px;
+            img{
+                -moz-box-shadow:    -7px 7px 7px 7px #dbd9d8;
+                -webkit-box-shadow: -7px 7px 7px 7px #dbd9d8;
+                box-shadow:         -7px 7px 7px 7px #dbd9d8;
+            }
+          }
+        }
+     }
+  }
+}

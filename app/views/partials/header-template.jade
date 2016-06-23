@@ -1,0 +1,26 @@
+include ../mixins/all
+.grid-fluid
+  div(data-init-plugin='init-menu-animate')
+    {{#each header}}
+    .group
+      a.logo(href='{{logo.url}}', title='{{title}}')
+        span.icon.icon-logo
+        +img('DigitasLBi', '../images/digitas.svg').text
+      a.connected-logo(href='{{logo.url}}', title='{{title}}')
+        span.icon.icon-connected
+        span.text
+          | {{logo.title}}
+    button(type='button', data-menu).nav-toggle: span
+    .nav-collapse
+      ul.main-nav
+        | {{#each mainNav}}
+        li
+          +link('{{title}}', '{{id}}')
+          | {{#if subMenu}}
+          ul.submenu
+            | {{#each subMenu}}
+            li: +link('{{title}}', '{{href}}')
+            | {{/each}}
+          | {{/if}}
+        | {{/each}}
+    | {{/each}}

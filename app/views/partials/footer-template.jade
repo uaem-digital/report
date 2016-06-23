@@ -1,0 +1,7 @@
+include ../mixins/all
+.grid-fluid
+  | {{#each footer}}
+  p
+    | {{copyright}}
+    +link('Please contact us', '{{contact-link}}')
+  | {{/each}}

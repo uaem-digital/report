@@ -1,0 +1,9 @@
+include ../mixins/all
+
+.download#download
+  .grid-fluid
+    h2.title {{title}}
+    h3.subtitle {{subTitle}}
+    .link-download
+        +link.btn.download('{{href}}')(target="_blank") {{button}}
+      .file-weight {{pdf}}

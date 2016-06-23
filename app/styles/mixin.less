@@ -1,0 +1,341 @@
+// Mixin
+.cssreset() {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+// Usage
+// Convert to em
+// .px2em(~"margin", 20px 30px 20px)
+// .px2em(~"font-size", 20px)
+// .px2em(~"font-size", 20px, 18px)
+// Convert to rem
+// .px2rem(~"margin", 20px 30px 20px)
+// .px2rem(~"font-size", 20px)
+// .px2rem(~"font-size", 20px, 18px)
+.px2units(@property, @unit, @target: @font-size-base, @default: @font-size-base) {
+  @n: length(@target);
+  .put(@i) when (extract(@target, @i) = auto), (extract(@target, @i) = 0) {
+    @item: extract(@target, @i);
+    .put((@i + 1), ~"@{item}");
+  }
+  .put(@i) when (default()) {
+    @item: unit(round(extract(@target, @i) / @default, 3), @unit);
+    .put((@i + 1), ~"@{item}");
+  }
+  .put(@i, @item) when (extract(@target, @i) = auto), (extract(@target, @i) = 0) and (@i <= @n) {
+    @nextItem: extract(@target, @i);
+    .put((@i + 1), ~"@{item} @{nextItem}");
+  }
+  .put(@i, @item) when (default()) and (@i <= @n) {
+    @nextItem: unit(round(extract(@target, @i) / @default, 3), @unit);
+    .put((@i + 1), ~"@{item} @{nextItem}");
+  }
+  .put(@i, @item) when (@i > @n) {
+    @{property}: @item;
+  }
+  .put(1);
+}
+.px2em(@property, @target: @font-size-base, @default: @font-size-base) {
+  .px2units(@property, em, @target, @default);
+}
+.px2rem(@property, @target: @font-size-base, @default: @font-size-base) {
+  .px2units(@property, rem, @target, @default);
+}
+
+// Sizing shortcuts
+.size(@width, @height: @width) {
+  width: @width;
+  height: @height;
+}
+
+// Center-align a block level element
+.center-block() {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// Usage
+// .border-radius() - default is 50%
+// .border-radius(20px) - all border is 20px
+// .border-radius(5px null 20px) - top left and bottom left border
+// .border-radius(null null 20px) - bottom left border
+.border-radius(@radius: 50%) {
+  @n: length(@radius);
+  @position: top-left, top-right, bottom-left, bottom-right;
+  .put(@i) when (@n = 1) and (@i <= length(@position)) {
+    @str: extract(@position, @i);
+    border-@{str}-radius: @radius;
+    .put(@i + 1);
+  }
+  .put(@i) when (@n > 1)  and (@i <= length(@position)) and (@i <= @n){
+    @r: extract(@radius, @i);
+    .check() when not (@r = null) {
+      @str: extract(@position, @i);
+      border-@{str}-radius: @r;
+    }
+    .check();
+    .put(@i + 1);
+  }
+  .put(1);
+}
+
+// Keyframes
+.keyframes(@name, @rules) {
+  @-webkit-keyframes @name { @rules(); }
+  @keyframes @name { @rules(); }
+}
+
+// Font face
+// Usage
+// 1. Create new variables for fonts name. ex: @var1:...; @var2:...;
+// 2. Call by .font-faces(@var1 @var2)
+.font-faces(@names) {
+  .loop(@i) when (@i <= length(@names)) {
+    @name: extract(@names, @i);
+    @font-face {
+      font-family: @name;
+      src: url('../fonts/@{name}.woff2') format('woff2'),
+        url('../fonts/@{name}.woff') format('woff'),
+        url('../fonts/@{name}.ttf')  format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+    .loop(@i + 1);
+  }
+  .loop(1);
+}
+
+// Placeholder text
+.placeholder(@color: @placeholder-color) {
+  &:-moz-placeholder {
+    color: @color;
+  }
+  &::-moz-placeholder {
+    color: @color;
+  }
+  &:-ms-input-placeholder {
+    color: @color;
+  }
+  &::-webkit-input-placeholder {
+    color: @color;
+  }
+}
+// Text overflow
+.text-overflow() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+// Clearfix
+.clearfix() {
+  &:before, &:after {
+    display: table;
+    content: "";
+  }
+  &:after {
+    clear: both;
+  }
+}
+// Grid System
+.make-grid-columns() {
+  .col(@index) {
+    @item: ~".col-xs-@{index}, .col-sm-@{index}, .col-md-@{index}, .col-lg-@{index}";
+    .col((@index + 1), @item);
+  }
+  .col(@index, @list) when (@index=< @grid-columns) {
+    @item: ~".col-xs-@{index}, .col-sm-@{index}, .col-md-@{index}, .col-lg-@{index}";
+    .col((@index + 1), ~"@{list}, @{item}");
+  }
+  .col(@index, @list) when (@index > @grid-columns) {
+    @{list} {
+      position: relative;
+      min-height: 1px;
+      padding-left: (@grid-gutter-width / 2);
+      padding-right: (@grid-gutter-width / 2);
+    }
+  }
+  .col(1);
+}
+.float-grid-columns(@class) {
+  .col(@index) {
+    @item: ~".col-@{class}-@{index}";
+    .col((@index + 1), @item);
+  }
+  .col(@index, @list) when (@index=< @grid-columns) {
+    @item: ~".col-@{class}-@{index}";
+    .col((@index + 1), ~"@{list}, @{item}");
+  }
+  .col(@index, @list) when (@index > @grid-columns) {
+    @{list} {
+      float: left;
+    }
+  }
+  .col(1);
+}
+.calc-grid-column(@index, @class, @type) when (@type = width) and (@index > 0) {
+  .col-@{class}-@{index} {
+    width: percentage((@index / @grid-columns));
+  }
+}
+.calc-grid-column(@index, @class, @type) when (@type = push) and (@index > 0) {
+  .col-@{class}-push-@{index} {
+    left: percentage((@index / @grid-columns));
+  }
+}
+.calc-grid-column(@index, @class, @type) when (@type = push) and (@index = 0) {
+  .col-@{class}-push-0 {
+    left: auto;
+  }
+}
+.calc-grid-column(@index, @class, @type) when (@type = pull) and (@index > 0) {
+  .col-@{class}-pull-@{index} {
+    right: percentage((@index / @grid-columns));
+  }
+}
+.calc-grid-column(@index, @class, @type) when (@type = pull) and (@index = 0) {
+  .col-@{class}-pull-0 {
+    right: auto;
+  }
+}
+.calc-grid-column(@index, @class, @type) when (@type = offset) {
+  .col-@{class}-offset-@{index}{
+    margin-left: percentage((@index / @grid-columns));
+  }
+}
+.loop-grid-columns(@index, @class, @type) when (@index >= 0) {
+  .calc-grid-column(@index, @class, @type);
+  .loop-grid-columns((@index - 1), @class, @type);
+}
+.make-grid(@class) {
+  .float-grid-columns(@class);
+  .loop-grid-columns(@grid-columns, @class, width);
+  .loop-grid-columns(@grid-columns, @class, pull);
+  .loop-grid-columns(@grid-columns, @class, push);
+  .loop-grid-columns(@grid-columns, @class, offset);
+}
+.grid-fixed(@gutter: @grid-gutter-width) {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: (@gutter / 2);
+  padding-right: (@gutter / 2);
+  &:extend(.clearfix all);
+}
+.make-row(@gutter: @grid-gutter-width) {
+  margin-left: (@gutter / -2);
+  margin-right: (@gutter / -2);
+  &:extend(.clearfix all);
+}
+.make-xs-column(@columns; @gutter: @grid-gutter-width) {
+  position: relative;
+  float: left;
+  width: percentage((@columns / @grid-columns));
+  min-height: 1px;
+  padding-left: (@gutter / 2);
+  padding-right: (@gutter / 2);
+}
+.make-xs-column-offset(@columns) {
+  margin-left: percentage((@columns / @grid-columns));
+}
+.make-xs-column-push(@columns) {
+  left: percentage((@columns / @grid-columns));
+}
+.make-xs-column-pull(@columns) {
+  right: percentage((@columns / @grid-columns));
+}
+.make-sm-column(@columns; @gutter: @grid-gutter-width) {
+  position: relative;
+  min-height: 1px;
+  padding-left: (@gutter / 2);
+  padding-right: (@gutter / 2);
+  @media (min-width: @screen-sm-min) {
+    float: left;
+    width: percentage((@columns / @grid-columns));
+  }
+}
+.make-sm-column-offset(@columns) {
+  @media (min-width: @screen-sm-min) {
+    margin-left: percentage((@columns / @grid-columns));
+  }
+}
+.make-sm-column-push(@columns) {
+  @media (min-width: @screen-sm-min) {
+    left: percentage((@columns / @grid-columns));
+  }
+}
+.make-sm-column-pull(@columns) {
+  @media (min-width: @screen-sm-min) {
+    right: percentage((@columns / @grid-columns));
+  }
+}
+.make-md-column(@columns; @gutter: @grid-gutter-width) {
+  position: relative;
+  min-height: 1px;
+  padding-left: (@gutter / 2);
+  padding-right: (@gutter / 2);
+  @media (min-width: @screen-md-min) {
+    float: left;
+    width: percentage((@columns / @grid-columns));
+  }
+}
+.make-md-column-offset(@columns) {
+  @media (min-width: @screen-md-min) {
+    margin-left: percentage((@columns / @grid-columns));
+  }
+}
+.make-md-column-push(@columns) {
+  @media (min-width: @screen-md-min) {
+    left: percentage((@columns / @grid-columns));
+  }
+}
+.make-md-column-pull(@columns) {
+  @media (min-width: @screen-md-min) {
+    right: percentage((@columns / @grid-columns));
+  }
+}
+.make-lg-column(@columns; @gutter: @grid-gutter-width) {
+  position: relative;
+  min-height: 1px;
+  padding-left: (@gutter / 2);
+  padding-right: (@gutter / 2);
+  @media (min-width: @screen-lg-min) {
+    float: left;
+    width: percentage((@columns / @grid-columns));
+  }
+}
+.make-lg-column-offset(@columns) {
+  @media (min-width: @screen-lg-min) {
+    margin-left: percentage((@columns / @grid-columns));
+  }
+}
+.make-lg-column-push(@columns) {
+  @media (min-width: @screen-lg-min) {
+    left: percentage((@columns / @grid-columns));
+  }
+}
+.make-lg-column-pull(@columns) {
+  @media (min-width: @screen-lg-min) {
+    right: percentage((@columns / @grid-columns));
+  }
+}
+.responsive-visibility() {
+  display: block !important;
+  table& {
+    display: table;
+  }
+  tr& {
+    display: table-row !important;
+  }
+  th&,
+  td& {
+    display: table-cell !important;
+  }
+}
+.responsive-invisibility() {
+  display: none !important;
+}

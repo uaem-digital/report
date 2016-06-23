@@ -1,0 +1,16 @@
+  "header": [
+    {
+      "logo": {
+        "url":"#",
+        "title": "Connected Commerce"
+      },
+      "mainNav": [
+        {
+          "title":"Methodology", "href":"methodology.html", "id": "#methodology"
+        },
+        {"title":"Countries", "href":"countries.html", "id": "#countries"},
+        {"title":"Download", "href":"download.html", "id": "#download"}
+      ]
+    }
+  ],
+

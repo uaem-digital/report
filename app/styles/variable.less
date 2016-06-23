@@ -1,0 +1,53 @@
+// Typography
+@font-family-sans-serif: Arial, sans-serif;
+@font-family-serif: Georgia, "Times New Roman", Times, serif;
+@font-family-monospace: Monaco, Menlo, Consolas, "Courier New", monospace;
+@font-family-base: @font-family-roboto-medium, @font-family-sans-serif;
+@font-family-roboto: "roboto-regular";
+@font-family-roboto-medium: "roboto-medium";
+@font-family-futura-bold: "futurat-bold";
+@font-family-futura-medium: "futuralt";
+@font-size-base: 16px;
+// Path
+@img-path: '../images';
+// Color
+@color: #000;
+@color-red: #ad1c23;
+@color-green: #508a45;
+@color-dark-green: #659e66;
+@color-gray: #375f33;
+@bgcolor: #e2e1e0;
+@text-color: @color;
+@placeholder-color: @color;
+// Link
+@link-color: @color;
+@link-hover-color: darken(@link-color, 15%);
+@link-active-color: darken(@link-color, 10%);
+@link-visited-color: darken(@link-color, 5%);
+// Grid System
+@screen-xs: 480px;
+@screen-xs-min: @screen-xs;
+@screen-phone: @screen-xs-min;
+@screen-sm: 769px;
+@screen-sm-min: @screen-sm;
+@screen-tablet: @screen-sm-min;
+@screen-md: 992px;
+@screen-md-min: @screen-md;
+@screen-desktop: @screen-md-min;
+@screen-lg: 1200px;
+@screen-lg-min: @screen-lg;
+@screen-lg-desktop: @screen-lg-min;
+@screen-xs-max: (@screen-sm-min - 1);
+@screen-sm-max: (@screen-md-min - 1);
+@screen-md-max: (@screen-lg-min - 1);
+@grid-columns: 12;
+@grid-gutter-width: 40px;
+@grid-float-breakpoint: @screen-sm-min;
+@grid-float-breakpoint-max: (@grid-float-breakpoint - 1);
+@grid-tablet: (720px + @grid-gutter-width);
+@grid-sm: @grid-tablet;
+@grid-desktop: (940px + @grid-gutter-width);
+@grid-md: @grid-desktop;
+@grid-large-desktop: (1140px + @grid-gutter-width);
+@grid-lg: @grid-large-desktop;
+@display-screen: 1170px + @grid-gutter-width;;

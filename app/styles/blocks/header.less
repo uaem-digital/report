@@ -1,0 +1,223 @@
+header {
+  padding: 20px 0;
+  background-color: @color-red;
+  .group {
+    position: relative;
+    float: left;
+    .icon {
+      font-size: 3em;
+    }
+    .logo {
+      img {
+        width: 164px;
+        margin: 6px 0 0 10px;
+        vertical-align: middle;
+      }
+    }
+    .connected-logo {
+      margin-left: 15px;
+      span {
+        display: inline-block;
+      }
+      .text {
+        max-width: 100px;
+        margin-left: 10px;
+        font-size: 1em;
+        font-family: @font-family-futura-bold;
+        text-transform: uppercase;
+      }
+    }
+    a span {
+      font-size: 0.9em;
+      vertical-align: middle;
+    }
+    .icon-digitas {
+      display: none;
+    }
+  }
+  a, a:visited, a:hover {
+    color: white;
+  }
+  li {
+    float: left;
+    position: relative;
+    display: block;
+    a {
+      padding: 5px;
+      color: white;
+      font-family: @font-family-roboto;
+      transition: all 0.3s;
+      text-align: center;
+      &.connected-logo {
+        padding: 0 0 0 15px;
+        .text {
+          max-width: 100px;
+        }
+      }
+    }
+  }
+  .active a {
+    color: gray;
+  }
+  .nav-collapse {
+    position: absolute;
+    top: 0;
+    width: 0;
+    float: right;
+    transition: width .5s;
+    overflow: hidden;
+    z-index: 9;
+    li {
+      padding-left: 35px;
+      &:first-child {
+        padding-left: 0;
+      }
+      a {
+        padding: 5px 0;
+        &:hover {
+          text-decoration: underline;
+          color: white;
+        }
+      }
+    }
+    &.open {
+      right: 0;
+      width: 80%;
+      height: 100%;
+      background-color: white;
+      li {
+        float: none;
+        border-bottom: 1px solid #b6b5b4;
+        text-align: center;
+        a {
+          display: inline-block;
+          padding: 20px;
+          font-size: 2.571em;
+          color: #b6b4b3;
+        }
+      }
+    }
+  }
+  .nav-toggle {
+    position: relative;
+    float: right;
+    .size(48px, 37px);
+    margin-top: 8px;
+    border: none;
+    background-color: transparent;
+    span {
+      top: 50%;
+      margin-top: -2px;
+      &:before {
+        top: -14px;
+      }
+      &:after {
+        top: 14px;
+      }
+    }
+    span, span:before, span:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      width: 47px;
+      height: 4px;
+      border: none;
+      border-radius: 2px;
+      background-color: white;
+    }
+  }
+}
+.country-header {
+  display: none;
+}
+.country-page {
+  .group {
+    position: absolute;
+    left: 50%;
+    top: 18px;
+    margin-left: -108px;
+  }
+  .country-header {
+    &.open {
+      top: 0;
+      left: 0;
+      width: 80%;
+      height: 100%;
+      background-color: white;
+      .country-list {
+        display: block;
+      }
+    }
+    .country-list {
+      position: absolute;
+      display: none;
+      padding: 20px 30px;
+      z-index: 99;
+      transition: width 0.3s;
+      overflow: hidden;
+    }
+    .title {
+      font-size: 2.429em;
+      padding: 20px 0 10px;
+    }
+    .sub-title {
+      font-size: 1.7em;
+    }
+    .btn-close {
+      height: 30px;
+    }
+    .icon-close {
+      position: relative;
+      display: block;
+      float: right;
+      .size(30px);
+      &:before,
+      &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 15px;
+        .size(40px,3px);
+        background-color: @color-gray;
+        border-radius: 3px;
+      }
+      &:before {
+        transform: rotate(45deg);
+      }
+      &:after {
+        transform: rotate(-45deg);
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: @screen-sm) {
+  header {
+    .nav-collapse {
+      position: static;
+      display: block;
+      width: inherit;
+      padding: 16px 0;
+    }
+    .nav-toggle {
+      display: none;
+    }
+    .group {
+      .icon-digitas {
+        display: inline-block;
+        margin-left: 10px;
+        padding: 6px 0 0 0;
+        font-size: 0.8em;
+      }
+    }
+  }
+  .country-page {
+    .country-header {
+      display: none;
+    }
+    .group {
+      position: static;
+      margin-left: 0
+    }
+  }
+}

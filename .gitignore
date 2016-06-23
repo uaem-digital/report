@@ -1,0 +1,11 @@
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+.settings
+npm-debug.log
+.cache
+._*
+Thumbs.db
+node_modules
+static
+/.grunt

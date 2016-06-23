@@ -1,0 +1,43 @@
+footer {
+  position: relative;
+  float: left;
+  width: 100%;
+  padding: 28px 0 22px;
+  background-color: @color-green;
+  text-align: center;
+  font: 1.143em @font-family-roboto;
+  color: #375f33;
+  &:before{
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255,255,255,0.15);
+  }
+  p {
+    position: relative;
+    a {
+      color: #375f33;
+      text-decoration: underline;
+      text-transform: lowercase;
+      &:hover {
+        text-decoration: none;
+        color: inherit;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  footer {
+    padding: 28px 0 130px;
+  }
+}
+
+@media only screen and (min-width: 1124px) {
+  footer {
+    padding: 28px 0 22px;
+  }
+}

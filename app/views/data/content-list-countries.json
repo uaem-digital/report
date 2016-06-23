@@ -1,0 +1,23 @@
+  "select-country": [
+    {
+      "title":"select a country",
+      "subTitle":"Ut enim a minim veniam nostruc.",
+      "languages": [
+        {"title": "France", "alt": "France", "href":"#", "class": "languages", "image": "./images/flag/flag-FR.svg"},
+        {"title": "Germany", "alt": "Germany", "href":"#", "class": "languages", "image": "./images/flag/flag-DE.svg"},
+        {"title": "Switzerland", "alt": "Switzerland", "href":"#", "class": "languages", "image": "images/flag/flag-CH.svg"},
+        {"title": "United States", "alt": "United States", "href":"#", "class": "languages", "image": "images/flag/flag-US.svg"},
+        {"title": "Italy", "alt": "Italy", "href":"#", "class": "languages", "image": "images/flag/flag-IT.svg"},
+        {"title": "Spain", "alt": "Spain", "href":"#", "class": "languages", "image": "images/flag/flag-ES.svg"},
+        {"title": "china", "alt": "china", "href":"#", "class": "languages", "image": "images/flag/flag-CN.svg"},
+        {"title": "United Kingdom", "alt": "United Kingdom", "href":"#", "class": "languages", "image": "images/flag/flag-EN.svg"},
+        {"title": "Netherlands", "alt": "Netherlands", "href":"#", "class": "languages", "image": "images/flag/flag-NL.svg"},
+        {"title": "Singapore", "alt": "Singapore", "href":"#", "class": "languages", "image": "images/flag/flag-SG.svg"},
+        {"title": "Spain", "alt": "Spain", "href":"#", "class": "languages", "image": "images/flag/flag-ES.svg"},
+        {"title": "china", "alt": "china", "href":"#", "class": "languages", "image": "images/flag/flag-CN.svg"},
+        {"title": "United Kingdom", "alt": "United Kingdom", "href":"#", "class": "languages", "image": "images/flag/flag-EN.svg"},
+        {"title": "Netherlands", "alt": "Netherlands", "href":"#", "class": "languages", "image": "images/flag/flag-NL.svg"},
+        {"title": "Singapore", "alt": "Singapore", "href":"#", "class": "languages", "image": "images/flag/flag-SG.svg"}
+      ]
+    }
+  ],
