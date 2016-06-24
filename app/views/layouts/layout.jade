@@ -21,8 +21,9 @@ html(class="no-js", lang="en")
     link(rel="stylesheet", href="css/style.css")
     // endbuild
     script(src="js/modernizr.js")
-  body(class=bodyClass)
-    .container(data-ajax="data/home.json")
+  body(class=bodyClass)(data-handlebars)
+    .loading(data-loading)
+    .container.loading(data-ajax="data/home.json")
       include ../blocks/header
       block container
       include ../blocks/footer

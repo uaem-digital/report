@@ -1,82 +1,188 @@
-.title{
-      .px2rem(~"font-size", 35px);
-      line-height: 35px;
-      font-family: @font-family-futura-bold;
-      text-transform: uppercase;
-    }
-.subtitle{
-    .px2rem(~"font-size", 25px);
-    line-height: 45px ;
-    font-family: @font-family-futura-medium ;
-  }
-.connected-block {
-    text-align: center;
-    text-transform: uppercase;
-    background-color: #ad1c23;
-    position: relative;
-    padding: 22px;
-    span {
-        display: inline-block;
-        vertical-align: middle;
-        > span {
-          vertical-align: top;
-        }
-      }
-    .icon-connected-2 {
-      font-size: 7em;
-    }
-    .text {
-      margin-left: 15px;
-      color: white;
-      text-align: left;
-      .px2rem(~"font-size", 30px);
-      font-family: @font-family-futura-bold;
+.title {
+  text-transform: uppercase;
+}
 
+.title {
+  .px2rem(~"font-size", 35px);
+  .px2rem(line-height, 35px);
+}
+
+.subtitle {
+  .px2rem(~"font-size", 17px);
+  .px2rem(line-height, 40px);
+}
+
+.introduce {
+  .px2rem(padding-top, 42px);
+  .group {
+    position: relative;
+    overflow: hidden;
+    .px2rem(padding, 43px 0);
+    &:before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 50%;
+      right: 100%;
+      left: 0;
+      top: 0;
+      z-index: 1;
+      background: #ee462f;
     }
- }
-  .block-left{
-    background-color: #ee462f;
-    .title{
-        color: #aa1400;
-    }
-    .subtitle{
-        color: #aa1400;
-    }
-    p{
-        color: #aa1400;
+    &:after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 50%;
+      height: 50%;
+      z-index: 1;
+      background: #f17632;
     }
   }
-  .block-right{
-    background-color: #f17632;
-     .title{
-        color: #a63b00;
-    }
-     .subtitle{
-        color: #a63b00;
-    }
-    p{
-      color: #a63b00;
+  .new-arrive,
+  .methodology {
+    position: relative;
+    z-index: 2;
+  }
+}
+
+.connected-block {
+  position: relative;
+  .px2rem(padding, 30px 0);
+  background-color: #ad1c23;
+  text-align: center;
+  text-transform: uppercase;
+  span {
+    display: inline-block;
+    vertical-align: middle;
+    > span {
+      vertical-align: top;
     }
   }
-  .block-left, .block-right{
-    p{
-      .px2rem(~"font-size", 16px);
-      line-height: 30px;
-      margin-top: 17px;
-      font-family: @font-family-roboto-medium;
-    }
+  .icon-connected-2 {
+    .px2rem(~"font-size", 96px);
   }
-@media (max-width: @screen-phone) {
-  .main{
-     .block-left, .block-right{
-        padding-top: 50px;
-        padding-bottom: 50px;
- .title{
+  .text {
+    .px2rem(margin-left, 15px);
+    max-width: 175px;
+    color: white;
+    text-align: justify;
+    .px2rem(~"font-size", 30px);
+    font-family: @font-family-futura-bold;
+  }
+}
+
+.new-arrive {
+  .title {
+    color: @color-pomegranate;
+  }
+  .subtitle {
+    color: @color-pomegranate;
+  }
+  .text {
+    color: @color-pomegranate;
+  }
+}
+
+.methodology {
+  padding-top: 43px;
+  .title {
+    color: @color-pumpkin;
+  }
+  .subtitle {
+    color: @color-pumpkin;
+  }
+  .text {
+    color: @color-pumpkin;
+  }
+}
+
+.new-arrive,
+.methodology {
+  position: relative;
+  z-index: 2;
+  p {
+    .px2rem(~"font-size", 16px);
+    .px2rem(line-height, 30px);
+    .px2rem(margin-top, 17px);
+    font-family: @font-family-roboto-medium;
+  }
+}
+
+@media (min-width: @screen-phone) {
+  .introduce {
+    .px2rem(padding-top, 86px);
+  }
+  .title {
     .px2rem(~"font-size", 35px);
   }
-  .subtitle{
+  .subtitle {
     .px2rem(~"font-size", 17px);
   }
-     }
+  .new-arrive {
+    z-index: 1;
+    position: relative;
+  }
+  .methodology {
+    .px2rem(padding-left, 50px 0);
+    z-index: 1;
+    position: relative;
+  }
+}
+
+@media (min-width: @screen-desktop) {
+  .introduce {
+    .px2rem(padding-top, 90px);
+    .group {
+      position: relative;
+      overflow: hidden;
+      .px2rem(padding, 43px 0);
+      &:before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        right: 50%;
+        left: 0;
+        top: 0;
+        z-index: 1;
+        background: #ee462f;
+      }
+      &:after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        left: 50%;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        height: 100%;
+        z-index: 1;
+        background: #f17632;
+      }
+    }
+  }
+  .title {
+    .px2rem(~"font-size", 35px);
+    .px2rem(line-height, 35px);
+    font-family: @font-family-futura-bold;
+  }
+  .subtitle {
+    .px2rem(~"font-size", 25px);
+    .px2rem(line-height, 45px);
+    font-family: @font-family-futura-medium ;
+  }
+  .new-arrive {
+    z-index: 2;
+    position: relative;
+  }
+  .methodology {
+    .px2rem(padding-top, 0);
+    .px2rem(padding-left, 24px);
+    z-index: 2;
+    position: relative;
   }
 }

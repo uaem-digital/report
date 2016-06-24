@@ -1,29 +1,80 @@
-.countries{
-    text-align: center;
-    background: #f4f2f1;
-    color: #b6b4b3;
-    .select-country{
-      li{
-        display: inline-block;
+.img-responsive {
+  max-width: 100%;
+}
+
+.countries {
+  text-align: center;
+  background: #f4f2f1;
+  color: #b6b4b3;
+  vertical-align: middle;
+  .px2rem(padding, 50px 0);
+  .select-country {
+    .px2rem(max-width, 590px);
+    .px2rem(margin, 0 auto);
+    li {
+      display: inline-block;
+      .px2rem(padding-left, 10px);
+      .px2rem(padding-right, 10px);
+      .px2rem(margin-top, 30px);
+      .px2rem(margin-bottom, 19px);
+      a {
+        .px2rem(width, 50px);
+        .px2rem(height, 35px);
+        display: block;
+        img {
+          -moz-box-shadow: -7px 7px 0px #dbd9d8;
+          -webkit-box-shadow: -7px 7px 0px #dbd9d8;
+          box-shadow: -7px 7px 0px #dbd9d8;
+        }
       }
     }
   }
-@media (max-width:@screen-phone) {
-.countries{
-  padding-top: 50px;
-  padding-bottom: 50px;
-     .select-country{
-        li{
-          a{
-              width: 75px;
-              height: 50px;
-            img{
-                -moz-box-shadow:    -7px 7px 7px 7px #dbd9d8;
-                -webkit-box-shadow: -7px 7px 7px 7px #dbd9d8;
-                box-shadow:         -7px 7px 7px 7px #dbd9d8;
-            }
+}
+
+@media (min-width: @screen-phone) {
+  .countries {
+    .px2rem(padding, 50px 0);
+    .select-country {
+      .px2rem(max-width, 590px);
+      li {
+        .px2rem(padding-right, 15px);
+        .px2rem(margin-bottom, 30px);
+        a {
+          .px2rem(width, 75px);
+          .px2rem(height, 50px);
+          display: block;
+          img {
+            -moz-box-shadow: -7px 7px 0 #dbd9d8;
+            -webkit-box-shadow: -7px 7px 0 #dbd9d8;
+            box-shadow: -7px 7px 0 #dbd9d8;
           }
         }
-     }
+      }
+    }
+  }
+}
+
+@media (min-width: @screen-desktop) {
+  .countries {
+    .px2rem(padding, 53px 0);
+    .select-country {
+      .px2rem(max-width, 590px);
+      li {
+        .px2rem(padding-left, 17px);
+        .px2rem(padding-right, 17px);
+        .px2rem(margin-top, 30px);
+        .px2rem(margin-bottom, 19px);
+        a {
+          .px2rem(width, 75px);
+          .px2rem(height, 50px);
+          display: block;
+          img {
+            -moz-box-shadow: -7px 7px 0 #dbd9d8;
+            -webkit-box-shadow: -7px 7px 0 #dbd9d8;
+            box-shadow: -7px 7px 0 #dbd9d8;
+          }
+        }
+      }
+    }
   }
 }

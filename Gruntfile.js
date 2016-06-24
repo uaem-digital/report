@@ -153,7 +153,7 @@ module.exports = function(grunt) {
       },
       jade: {
         files: ['<%= meta.views %>**/*.jade'],
-        tasks: ['jadelint', 'jade', 'htmlhint']
+        tasks: ['jade', 'htmlhint']
       },
       data: {
         files: ['<%= meta.views %>data/**'],

@@ -2,11 +2,18 @@
  * common.js
  * ========= */
 
-(function($, App, Handlebars) {
-
+(function(App, Handlebars) {
   'use strict';
+  (function($, window, undifined) {
 
-  $(function() {
+    var pluginName = 'handlebars',
+        dataAjax = '[data-ajax]',
+        loadingElement = $('[data-loading]'),
+        loadingClass = 'loading',
+        data = $(dataAjax).data('ajax'),
+        win = $(window),
+        countBlock = 0,
+        isAddPlugins = false;
 
     function loadTemplateComplete(data, target) {
       return Handlebars.compile(data);
@@ -25,50 +32,82 @@
       }
     }
 
-    function showLoading() {
-      htmlBody.addClass('freeze');
-      loadingEl.fadeIn();
-    }
-
     function hideLoading() {
+      $(dataAjax).removeClass(loadingClass);
       setTimeout(function() {
-        loadingEl.fadeOut(function() {
-          htmlBody.removeClass('freeze');
-        });
-      }, delay);
+        loadingElement.addClass('hidden');
+      }, 1000);
     }
 
-    var allBlock = $('[data-template]');
-    var loadingEl = $('body > .loading');
-    var delay = 500;
-    var data = $('body > .container').data('ajax');
-    var win = $(window),
-        htmlBody = $('html, body');
+    function Plugin(element, options) {
+      this.element = $(element);
+      this.options = $.extend({}, $.fn[pluginName].defaults, this.element.data(), options);
+      this.init();
+    }
 
-    allBlock.each(function() {
-      var block = $(this),
-          template = block.data('template');
-      $.when(
-        $.ajax({
-          url: data,
-          dataType: 'json',
-          cache: false
-        }),
-        $.ajax({
-          url: template,
-          dataType: 'text',
-          cache: false
-        }))
-        .done(function(jsonData, templateData) {
-          var template = loadTemplateComplete(templateData[0], block),
-              slider;
-          loadDataComplete(jsonData[0], block, template);
-          hideLoading();
-        })
-        .fail(function() {
-          block.fadeOut();
+    Plugin.prototype = {
+      init: function() {
+        var that = this,
+            element = this.element,
+            options = this.options,
+            allBlock = $(options.dataTemplate);
+        allBlock.each(function() {
+          var block = $(this),
+              template = block.data('template');
+          $.when(
+            $.ajax({
+              url: data,
+              dataType: 'json',
+              cache: false
+            }),
+            $.ajax({
+              url: template,
+              dataType: 'text',
+              cache: false
+            }))
+            .done(function(jsonData, templateData) {
+              var template = loadTemplateComplete(templateData[0], block);
+              loadDataComplete(jsonData[0], block, template);
+              countBlock++;
+              if (countBlock === allBlock.length) {
+                hideLoading();
+                $('[data-' + options.menuPluginName + ']')[options.menuPluginName]();
+                $('[data-' + options.scrollTopPluginName + ']')[options.scrollTopPluginName]();
+              }
+            })
+            .fail(function() {
+              block.fadeOut();
+            });
         });
-    });
-  });
+      },
+      destroy: function() {
+        $.removeData(this.element[0], pluginName);
+      }
+    };
 
-}(window.jQuery, window.App, window.Handlebars));
+    $.fn[pluginName] = function(options, params) {
+      return this.each(function() {
+        var instance = $.data(this, pluginName);
+        if (!instance) {
+          $.data(this, pluginName, new Plugin(this, options));
+        } else if (instance[options]) {
+          instance[options](params);
+        } else {
+          window.console && console.log(options ? options + ' method is not exists in ' + pluginName : pluginName + ' plugin has been initialized');
+        }
+      });
+    };
+
+    $.fn[pluginName].defaults = {
+      dataTemplate: '[data-template]',
+      scrollTopPluginName: 'scroll-top',
+      menuPluginName: 'menu'
+    };
+
+    $(function() {
+      $('[data-' + pluginName + ']')[pluginName]();
+    });
+
+  }(jQuery, window));
+
+}(window.App, window.Handlebars));

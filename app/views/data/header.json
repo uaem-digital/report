@@ -1,5 +1,9 @@
-  "header": [
+  "header":
     {
+      "country": {
+        "title": "France",
+        "img": "./../images/flag/flag-FR.svg"
+      },
       "logo": {
         "url":"#",
         "title": "Connected Commerce"
@@ -11,6 +15,5 @@
         {"title":"Countries", "href":"countries.html", "id": "#countries"},
         {"title":"Download", "href":"download.html", "id": "#download"}
       ]
-    }
-  ],
+    },
 

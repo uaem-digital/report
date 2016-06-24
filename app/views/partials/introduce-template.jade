@@ -1,23 +1,22 @@
 include ../mixins/all
-.connected-block
+.connected-block(data-connected-block)
   .grid-fluid
       span.icon.icon-connected-2
         span.path1
         span.path2
-      span.text
-          | Connected <br> Commerce
-.grid-fluid#methodology
+      span.text {{introduce.icon.text}}
+.group#methodology
   .row
-
-      .block-left.col-sm-6.col-xs-12
-          | {{#each col-left}}
-          h2.title {{title}}
-          h3.subtitle {{subTitle}}
-          p {{content}}
-          | {{/each}}
-      .block-right.col-sm-6.col-xs-12
-          | {{#each col-right}}
-          h2.title {{title}}
-          h3.subtitle {{subTitle}}
-          p {{content}}
-          | {{/each}}
+    .grid-fluid
+      .col-sm-6
+        .new-arrive
+          hgroup
+            h2.title {{introduce.blockLeft.title}}
+            h3.subtitle {{introduce.blockLeft.subTitle}}
+          p.text {{introduce.blockLeft.content}}
+      .col-sm-6
+        .methodology
+          hgroup
+            h2.title {{introduce.blockRight.title}}
+            h3.subtitle {{introduce.blockRight.subTitle}}
+          p.text {{introduce.blockRight.content}}

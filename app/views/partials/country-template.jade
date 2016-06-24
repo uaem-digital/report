@@ -1,11 +1,12 @@
 include ../mixins/all
 .grid-fluid
     | {{#each select-country}}
-    h2.title {{title}}
-    h3.subtitle {{subTitle}}
+    hgroup
+      h2.title {{title}}
+      h3.subtitle {{subTitle}}
     ul.select-country
       | {{#each languages}}
       li: +link('{{title}}', '{{href}}')(target="_blank", class='{{class}}')
-          +img ('{{alt}}','{{image}}')
+          +img('{{alt}}','{{image}}')(class="img-reponsive")
       | {{/each}}
     | {{/each}}
